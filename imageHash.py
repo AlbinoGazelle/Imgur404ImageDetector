@@ -1,10 +1,9 @@
 from PIL import Image
 import imagehash
 import os
-#first get filenames in directory(done)
-#then calculate the hash for each file(done)
-#compare bad hash to list of all hashes
-#delete any files that has bad hash
+import json
+#hash of imgur404 images
+badHash = 'c0fcfffefe00e040'
 def find_images(userpaths, hashfunc = imagehash.average_hash):
     def is_image(filename):
         f = filename.lower()
@@ -14,15 +13,17 @@ def find_images(userpaths, hashfunc = imagehash.average_hash):
     image_filenames = []
     for userpath in userpaths:
         image_filenames += [os.path.join(userpath, path) for path in os.listdir(userpath) if is_image(path)]
-    images = {}
     for img in sorted(image_filenames):
         try:
             hash = hashfunc(Image.open(img))
-            print('Image:', img, 'Hash:', hash)
+            hash = str(hash)
         except Exception as e:
             print('Problem:', e, 'with', img)
-        if hash in images:
-            print(img, ' already exists')
+        if hash in badHash:
+            print('Deleting:', img, 'Because it has bad hash!')
+            os.remove(img)
 
+#for testing
+#still need to add config file support
 path = ['C:\\Test']
 find_images(path)
