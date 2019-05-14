@@ -1,9 +1,8 @@
 from PIL import Image
 import imagehash
 import os
-import json
-#first get filenames in directory
-#then calculate the hash for each file
+#first get filenames in directory(done)
+#then calculate the hash for each file(done)
 #compare bad hash to list of all hashes
 #delete any files that has bad hash
 def find_images(userpaths, hashfunc = imagehash.average_hash):
