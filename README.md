@@ -3,4 +3,4 @@ When scraping imgur, you'll run into an issue where broken links will return a 4
 This script attempts to look through a directory and remove those files.
 
 # Usage
-py imageHash.py directory
+py imageHash.py directory_path
